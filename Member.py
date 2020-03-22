@@ -7,8 +7,11 @@ class Member:
 
     MUTATION_PROB = 0.3
 
-    def __init__(self, string):
-        self.genes = string;
+    def __init__(self, genes):
+        self.genes = genes;
+        self.rawFitness = 0
+        self.scaleFitness = 0
+        self.normFitness = 0
     # end __init__
 
     def reproduce(self, otherMember):
@@ -27,3 +30,12 @@ class Member:
             length = len(self.genes)
             position = random.randrange(length);
             self.genes = self.genes[:position-1] + random.choice(string.ascii_lowercase) + self.genes[position:]
+
+    def calculateRawFitness(self, objective):
+        length = len(self.genes)
+        difLetters = sum(self.genes[i] != objective[i] for i in range(length))
+        self.rawFitness = difLetters/length
+
+    def calculateScaleFitness(self):
+        self.scaleFitness = 2**self.rawFitness;
+
