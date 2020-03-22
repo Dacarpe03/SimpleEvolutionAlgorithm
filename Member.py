@@ -37,5 +37,12 @@ class Member:
         self.rawFitness = difLetters/length
 
     def calculateScaleFitness(self):
-        self.scaleFitness = 2**self.rawFitness;
+        self.scaleFitness = 2**self.rawFitness
+
+    def calculateNormFitness(self, totalSum):
+        self.normFitness = self.scaleFitness/totalSum
+
+    def updateFitnesses(self, objective):
+        self.calculateRawFitness(objective)
+        self.calculateScaleFitness()
 
