@@ -8,7 +8,7 @@ class Member:
     MUTATION_PROB = 0.3
 
     def __init__(self, genes):
-        self.genes = genes;
+        self.genes = genes
         self.rawFitness = 0
         self.scaleFitness = 0
         self.normFitness = 0
@@ -28,8 +28,9 @@ class Member:
         prob = random.uniform(0, 1)
         if prob <= self.MUTATION_PROB:
             length = len(self.genes)
-            position = random.randrange(length);
-            self.genes = self.genes[:position-1] + random.choice(string.ascii_lowercase) + self.genes[position:]
+            position = random.randrange(length)
+            randomLetter = random.choice(string.letters + " ")
+            self.genes = self.genes[:position-1] + randomLetter + self.genes[position:]
 
     def calculateRawFitness(self, objective):
         length = len(self.genes)
